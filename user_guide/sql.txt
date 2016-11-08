@@ -1,0 +1,25 @@
+CREATE DATABASE har2;
+
+USE har2;
+
+CREATE TABLE asiakas (
+id_asiakas INT primary key auto_increment,
+etunimi VARCHAR(20),
+sukunimi VARCHAR(20),
+email VARCHAR(40)
+) Engine=InnoDB;
+
+CREATE TABLE tilaus (
+id_tilaus INT primary key auto_increment,
+tuote VARCHAR(40),
+koko VARCHAR(10),
+id_asiakas INT,
+FOREIGN KEY(id_asiakas) REFERENCES asiakas(id_asiakas)
+ON DELETE RESTRICT ON UPDATE CASCADE
+) Engine=InnoDB;
+
+GRANT ALL ON har2.* TO 'ci_user'@'localhost' IDENTIFIED BY 'ci_pass';
+
+INSERT INTO asiakas(etunimi,sukunimi,email) VALUES('Aino','Virta','aino.virta@gmail.com');
+INSERT INTO asiakas(etunimi,sukunimi,email) VALUES('Jussi','Määttä','juma@gmail.com');
+INSERT INTO asiakas(etunimi,sukunimi,email) VALUES('Juha','Mieto','jumi@gmail.com');
